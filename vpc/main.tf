@@ -68,6 +68,10 @@ module "range-vpc" {
   private_subnet_cidr_blocks = module.global_vars.cidr_block_sub[module.global_vars.environment[var.env]]["range_private"]
   public_subnet_cidr_blocks  = module.global_vars.cidr_block_sub[module.global_vars.environment[var.env]]["range_public"]
   region                     = module.global_vars.region[var.region]
+  subnet_tags = {
+    "kubernetes.io/cluster/${module.global_vars.cluster_name}-${module.global_vars.environment[var.env]}" = "shared"
+    "kubernetes.io/role/elb" = 1
+  }
 }
 
 /*
